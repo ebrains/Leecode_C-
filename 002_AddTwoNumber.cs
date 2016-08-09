@@ -1,12 +1,12 @@
 ﻿/*
-Given an array of integers, return indices of the two numbers such that they add up to a specific target.
-You are given two linked lists representing two non-negative numbers. The digits are stored in reverse order and each of their nodes contain a single digit. 
-Add the two numbers and return it as a linked list.
-
-Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
-Output: 7 -> 0 -> 8
-
+ * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+ * You are given two linked lists representing two non-negative numbers. The digits are stored in reverse order and each of their nodes contain a single digit. 
+ * Add the two numbers and return it as a linked list.
+ * 
+ * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+ * Output: 7 -> 0 -> 8
  */
+
 using System;
 using System.Collections.Generic;
 
@@ -24,17 +24,14 @@ namespace Leetcode
             l2.next = new ListNode(6);
             l2.next.next = new ListNode(5);
 
-            ListNode res = AddTwoNumbers(l1, l2);
-
+            Program test = new Program();
+            ListNode res = test.AddTwoNumbers(l1, l2);
             printNode(res);
-           
-           
-
         }
 
         static void printNode(ListNode l)
         {
-             while(l != null)
+            while (l != null)
             {
                 Console.WriteLine(l.val);
                 l = l.next;
@@ -42,17 +39,16 @@ namespace Leetcode
             Console.WriteLine();
         }
 
-
-        public static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+        public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
             int carry = 0;
 
             ListNode newHead = new ListNode(0);
             ListNode p1 = l1, p2 = l2, curr = newHead;
 
-            while(p1 !=null || p2!=null)
+            while (p1 != null || p2 != null)
             {
-                if(p1 !=null)
+                if (p1 != null)
                 {
                     carry += p1.val;
                     p1 = p1.next;
@@ -75,13 +71,12 @@ namespace Leetcode
         }
 
         //Definition for singly-linked list.
-        public class ListNode 
+        public class ListNode
         {
-          public int val;
-          public ListNode next;
-          public ListNode(int x) { val = x; }
+            public int val;
+            public ListNode next;
+            public ListNode(int x) { val = x; }
         }
-       
     }
 }
 
