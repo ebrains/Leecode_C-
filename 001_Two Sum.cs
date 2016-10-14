@@ -46,7 +46,7 @@ namespace Leetcode
         public int[] TwoSumHash(int[] nums, int target)
         {
             int[] res = new int[2];
-            Dictionary<Int32, Int32> dict = new Dictionary<Int32, Int32>();
+            Dictionary<int, int> dict = new Dictionary<int, int>();
             for (int i = 0; i < nums.Length; i++)
             {
                 if (dict.ContainsKey(target - nums[i]))
