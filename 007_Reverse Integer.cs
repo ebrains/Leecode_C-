@@ -34,7 +34,7 @@ namespace Leetcode
             {
                 int rev = res * 10 + x % 10;
                 x = x / 10;
-                if (rev / 10 != res)
+                if (rev / 10 != res)   //  avoid out of range
                 {
                     res = 0;
                     break;
