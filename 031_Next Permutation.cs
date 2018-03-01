@@ -1,17 +1,16 @@
 ﻿/*
-You are given a string, s, and a list of words, words, 
-that are all of the same length. Find all starting indices of substring(s) in s that is 
-a concatenation of each word in words exactly once and without any intervening characters.
-For example, given:
-s: "barfoothefoobarman"
-words: ["foo", "bar"]
-
-You should return the indices: [0,9].   (order does not matter).
+Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
+If such arrangement is not possible, it must rearrange it as the lowest possible order (ie, sorted in ascending order).
+The replacement must be in-place, do not allocate extra memory.
+Here are some examples. Inputs are in the left-hand column and its corresponding outputs are in the right-hand column.
+1,2,3 → 1,3,2
+3,2,1 → 1,2,3
+1,1,5 → 1,5,1
 */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Leetcode
 {
@@ -20,58 +19,59 @@ namespace Leetcode
         static void Main(string[] args)
         {
             Program test = new Program();
-            string s = "barfoothefoobarman";
-            string[] words = {"foo", "bar"};
-            IList<int> list = test.FindSubstring(s, words);
+            int[] a = { 3, 4, 6, 7, 4 };
+            test.NextPermutation(a);
 
-            foreach (int res in list)
+            foreach(int item in a )
             {
-                Console.Write(res + ",");
+                Console.Write(item + "  ");
             }
-
         }
 
+        /*Analysis:
+        1.From right to left, find the first digit which violate the increase trend,(PartitionNumber)
+        2.From right to left, find the first digit which larger than PartitionNumber,c call it changeNumber,
+        3. Swap the PartitionNumber and ChangeNumber
+        4. Reverse all the digit on the right of partition index.
+        */
 
-        public IList<int> FindSubstring(string s, string[] words)
-        {     
-            IList<int> res = new List<int>();
-            if (s == null || s.Length == 0 || words == null || words.Length == 0)
+        public void NextPermutation(int[] nums)
+        {
+            int i = nums.Length - 2;
+            while (i >= 0 && nums[i + 1] <= nums[i])
             {
-                return res;
+                i--;
             }
-
-            Dictionary<string, int> dict  = new Dictionary<string, int>();
-            for(int i = 0; i<words.Length; i++)
+            if (i >= 0)
             {
-                dict.Add(words[i], i);
-            }
-
-            int len = words[0].Length;
-            int count = 0;
-            
-
-            while (s.Length >= 3)
-            {
-                string strtemp = s.Substring(0, 3);
-                if (dict.ContainsKey(strtemp) == false)
+                int j = nums.Length - 1;
+                while (j >= 0 && nums[j] <= nums[i])
                 {
-                    s = s.Substring(3);
-                    res.Add(1);
+                    j--;
                 }
-                else
-                {
-                    s = s.Substring(3);
-                    res.Add(count);
-                    count = count + len;
-                    
-                }
+                swap(nums, i, j);
             }
+            reverse(nums, i + 1);
+        }
 
-            return res;
+        private void reverse(int[] nums, int start)
+        {
+            int i = start, j = nums.Length - 1;
+            while (i < j)
+            {
+                swap(nums, i, j);
+                i++;
+                j--;
+            }
+        }
 
+        private void swap(int[] nums, int i, int j)
+        {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
         }
 
     }
 }
-
 
