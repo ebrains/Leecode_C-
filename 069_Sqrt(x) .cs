@@ -30,7 +30,7 @@ namespace Leetcode
             Console.Write(test.MySqrt(i));
         }
 
-        // Newtown  Math solution 
+        // Newton  Math solution 
         public int MySqrt(int x)
         {
             {
